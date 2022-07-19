@@ -1,0 +1,55 @@
+{% include "header.html" %}
+{% import "bootstrap/wtf.html" as wtf %}
+
+  <!-- Page Header -->
+  <header class="masthead">
+    <div class="overlay"></div>
+    <div class="container">
+      <div class="row">
+        <div class="col-lg-8 col-md-10 mx-auto">
+          <div class="post-heading">
+            <h1>{{bill.name}}</h1>
+            <h2 class="subheading">{{bill.totalpayment}}</h2>
+            <span class="meta">Issued on
+              on {{bill.issuedate}}</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <!-- Post Content -->
+  <article>
+    <div class="container">
+      <div class="row">
+        <div class="col-lg-8 col-md-10 mx-auto">
+{% for key,value in bill.__dict__.items() %}
+          {%if 'instance_state' in key %}
+          {{pass}}
+          {%else%}
+          <h4>{{key}}: </h4><p>{{value}}</p>
+          {%endif%}
+          {% endfor %}
+          <hr>
+
+            <div class="clearfix">
+
+
+              <a class="btn btn-primary float-right" href="{{url_for('edit_bill', bill_id=bill.id)}}">Edit bill</a>
+               <a class="btn btn-primary float-right" href="{{url_for('delete_bill', bill_id=bill.id)}}"> Delete bill</a>
+
+            </div>
+
+
+
+<!--           Comments Area -->
+
+
+
+          </div>
+      </div>
+    </div>
+  </article>
+
+  <hr>
+{% include "footer.html" %}
